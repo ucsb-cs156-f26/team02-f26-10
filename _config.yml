@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-10
 owner: ucsb-cs156-f26
 repo_name: team02-f26-10
-pull_requests: [{"author":{"id":"U_kgDOB7w3Lw","is_bot":false,"login":"STeveCHEw1","name":"Yongxin Zhou"},"headRefName":"stevechew1-UCSBOrganization-backend","number":63,"title":"Copy UCSBOrganization backend CRUD API from team01","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/63"},{"author":{"id":"U_kgDOCuWucQ","is_bot":false,"login":"AtaYeke","name":"Ataman Yeke"},"headRefName":"Ata-UCSBDiningCommonsMenuItem-backend","number":62,"title":"ay - copy backend CRUD operations from team01 for the menu items","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/62"}]
+pull_requests: [{"author":{"id":"U_kgDOCuWucQ","is_bot":false,"login":"AtaYeke","name":"Ataman Yeke"},"headRefName":"Ata-UCSBDiningCommonsMenuItem-backend","number":62,"title":"ay - copy backend CRUD operations from team01 for the menu items","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/62"}]
