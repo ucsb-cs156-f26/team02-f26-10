@@ -72,7 +72,7 @@ export default function AppNavbar({
                     Placeholder
                   </Nav.Link>
                   <Nav.Link as={Link} to="/diningcommonsmenuitem">
-                    UCSB Dining Commons Menu Items
+                    UCSB Dining Commons Menu Item
                   </Nav.Link>
                 </>
               ) : (
