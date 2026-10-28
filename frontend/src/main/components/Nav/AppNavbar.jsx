@@ -76,6 +76,11 @@ export default function AppNavbar({
                   <Nav.Link as={Link} to="/ucsbdates">
                     UCSB Dates
                   </Nav.Link>
+                  {hasRole(currentUser, "ROLE_USER") && (
+                    <Nav.Link as={Link} to="/helprequest">
+                      HelpRequest
+                    </Nav.Link>
+                  )}
                   <Nav.Link as={Link} to="/placeholder">
                     Placeholder
                   </Nav.Link>
