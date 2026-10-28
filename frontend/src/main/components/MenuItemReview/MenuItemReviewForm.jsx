@@ -28,7 +28,7 @@ function MenuItemReviewForm({
             data-testid={`${testIdPrefix}-id`}
             type="number"
             readOnly
-            {...register("id", { valueAsNumber: true })}
+            {...register("id")}
           />
         </Form.Group>
       )}

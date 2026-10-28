@@ -133,6 +133,28 @@ describe("MenuItemReviewForm tests", () => {
     expect(submitAction).not.toHaveBeenCalled();
   });
 
+  test.each(["bad@@student@example.com", "student@example.com@@bad"])(
+    "rejects email with invalid prefix or suffix: %s",
+    async (email) => {
+      const submitAction = vi.fn();
+      renderForm({ submitAction });
+
+      fillValidFields();
+
+      fireEvent.change(screen.getByTestId(`${prefix}-reviewerEmail`), {
+        target: { value: email },
+      });
+
+      fireEvent.click(screen.getByTestId(`${prefix}-submit`));
+
+      expect(
+        await screen.findByText("Enter a valid email address."),
+      ).toBeInTheDocument();
+
+      expect(submitAction).not.toHaveBeenCalled();
+    },
+  );
+
   test("rejects noninteger IDs and ratings", async () => {
     renderForm();
     fillValidFields();
