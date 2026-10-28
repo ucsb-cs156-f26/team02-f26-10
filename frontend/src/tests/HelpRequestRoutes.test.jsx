@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import App from "../App";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 
 const { mockCurrentUser } = vi.hoisted(() => ({ mockCurrentUser: vi.fn() }));
@@ -24,11 +25,18 @@ test.each([
     mockCurrentUser.mockReturnValue(user);
     render(
       <MemoryRouter initialEntries={[path]}>
-        <App />
+        <QueryClientProvider client={new QueryClient()}>
+          <App />
+        </QueryClientProvider>
       </MemoryRouter>,
     );
     expect(
-      screen.getByRole("heading", { name: `${kind} page not yet implemented` }),
+      screen.getByRole("heading", {
+        name:
+          kind === "Create"
+            ? "Create New HelpRequest"
+            : `${kind} page not yet implemented`,
+      }),
     ).toBeInTheDocument();
   },
 );
@@ -47,12 +55,12 @@ test.each([
     try {
       render(
         <MemoryRouter initialEntries={[path]}>
-          <App />
+          <QueryClientProvider client={new QueryClient()}>
+            <App />
+          </QueryClientProvider>
         </MemoryRouter>,
       );
-      expect(
-        screen.queryByRole("heading", { name: /page not yet implemented/ }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByRole("heading")).not.toBeInTheDocument();
     } finally {
       warning.mockRestore();
     }
