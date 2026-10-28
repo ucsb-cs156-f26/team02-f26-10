@@ -8,8 +8,11 @@ import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 
 import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
+import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
 import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
+import MenuItemReviewCreatePage from "main/pages/MenuItemReview/MenuItemReviewCreatePage";
 import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
+import MenuItemReviewEditPage from "main/pages/MenuItemReview/MenuItemReviewEditPage";
 
 import UCSBDiningCommonsMenuItemsIndexPage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemsIndexPage";
 import UCSBDiningCommonsMenuItemsCreatePage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemsCreatePage";
@@ -79,6 +82,11 @@ function App() {
       {hasRole(currentUser, "ROLE_USER") && (
         <>
           <Route exact path="/restaurants" element={<RestaurantIndexPage />} />
+          <Route
+            exact
+            path="/menuitemreview"
+            element={<MenuItemReviewIndexPage />}
+          />
         </>
       )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
@@ -90,8 +98,18 @@ function App() {
           />
           <Route
             exact
+            path="/menuitemreview/edit/:id"
+            element={<MenuItemReviewEditPage />}
+          />
+          <Route
+            exact
             path="/restaurants/create"
             element={<RestaurantCreatePage />}
+          />
+          <Route
+            exact
+            path="/menuitemreview/create"
+            element={<MenuItemReviewCreatePage />}
           />
         </>
       )}
