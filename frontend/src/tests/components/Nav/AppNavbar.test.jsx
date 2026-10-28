@@ -232,4 +232,40 @@ describe("AppNavbar tests", () => {
       "/oauth2/authorization/google",
     );
   });
+
+  test("renders the UCSBOrganization link for a user", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <AppNavbar currentUser={currentUserFixtures.userOnly} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      screen.getByRole("link", { name: "UCSBOrganization" }),
+    ).toHaveAttribute("href", "/ucsborganization");
+  });
+
+  test("hides the UCSBOrganization link without ROLE_USER", () => {
+    const currentUser = {
+      ...currentUserFixtures.userOnly,
+      root: {
+        ...currentUserFixtures.userOnly.root,
+        rolesList: [],
+      },
+    };
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <AppNavbar currentUser={currentUser} />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      screen.queryByRole("link", { name: "UCSBOrganization" }),
+    ).not.toBeInTheDocument();
+  });
 });
