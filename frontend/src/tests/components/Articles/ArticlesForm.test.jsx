@@ -44,6 +44,7 @@ describe("ArticlesForm tests", () => {
     );
 
     expect(screen.getByLabelText("Id")).toHaveValue(String(article.id));
+    expect(screen.getByTestId(`${testId}-id`)).toHaveValue(String(article.id));
     expect(screen.getByLabelText("Id")).toHaveAttribute("readonly");
     for (const field of ["title", "url", "explanation", "email"]) {
       expect(screen.getByTestId(`${testId}-${field}`)).toHaveValue(
@@ -131,6 +132,7 @@ describe("ArticlesForm tests", () => {
     );
 
     const { id: _id, ...contents } = article;
+    contents.title = "UCSB";
     contents.dateAdded = "2026-10-21T12:00";
     for (const [field, value] of Object.entries(contents)) {
       fireEvent.change(screen.getByTestId(`${testId}-${field}`), {
@@ -142,5 +144,63 @@ describe("ArticlesForm tests", () => {
     await waitFor(() => expect(submitAction).toHaveBeenCalledTimes(1));
     expect(submitAction.mock.calls[0][0]).toEqual(contents);
     expect(screen.getByLabelText("Title")).not.toHaveClass("is-invalid");
+  });
+
+  test("rejects a whitespace-only title", async () => {
+    const submitAction = vi.fn();
+    render(
+      <Router>
+        <ArticlesForm initialContents={article} submitAction={submitAction} />
+      </Router>,
+    );
+
+    fireEvent.change(screen.getByLabelText("Title"), {
+      target: { value: "   " },
+    });
+    fireEvent.click(screen.getByTestId(`${testId}-submit`));
+
+    expect(await screen.findByText("Title is required.")).toBeInTheDocument();
+    expect(submitAction).not.toHaveBeenCalled();
+  });
+
+  test.each([
+    ["URL", "https://news.ucsb.edu/" + "a".repeat(256)],
+    ["Explanation", "a".repeat(256)],
+    ["Email", "a".repeat(256) + "@ucsb.edu"],
+  ])("rejects %s longer than 255 characters", async (label, value) => {
+    const submitAction = vi.fn();
+    render(
+      <Router>
+        <ArticlesForm initialContents={article} submitAction={submitAction} />
+      </Router>,
+    );
+
+    fireEvent.change(screen.getByLabelText(label), { target: { value } });
+    fireEvent.click(screen.getByTestId(`${testId}-submit`));
+
+    expect(
+      await screen.findByText("Max length 255 characters"),
+    ).toBeInTheDocument();
+    expect(submitAction).not.toHaveBeenCalled();
+  });
+
+  test("rejects a date outside the four-digit year format", async () => {
+    const submitAction = vi.fn();
+    render(
+      <Router>
+        <ArticlesForm initialContents={article} submitAction={submitAction} />
+      </Router>,
+    );
+
+    // The picker accepts five-digit years, but the registered format does not.
+    fireEvent.change(screen.getByLabelText("Date Added"), {
+      target: { value: "10000-01-01T12:00" },
+    });
+    fireEvent.click(screen.getByTestId(`${testId}-submit`));
+
+    expect(
+      await screen.findByText("Date Added must be a valid date and time."),
+    ).toBeInTheDocument();
+    expect(submitAction).not.toHaveBeenCalled();
   });
 });
