@@ -19,7 +19,7 @@ export default function AppNavbar({
       )}
 
       <Navbar
-        expand="xxl"
+        expand="lg"
         variant="dark"
         bg="dark"
         sticky="top"
