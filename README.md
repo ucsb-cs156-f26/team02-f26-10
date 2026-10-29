@@ -2,7 +2,7 @@
 
 Instructions: <https://ucsb-cs156.github.io/s26/lab/team02.html>
 
-TODO: change heading above to your repo name, e.g. `# team02-s26-17`
+
 
 TODO: Add a link to the deployed Dokku app for your team here, e.g.
 
