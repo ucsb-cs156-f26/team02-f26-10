@@ -81,6 +81,11 @@ export default function AppNavbar({
                       HelpRequest
                     </Nav.Link>
                   )}
+                  {hasRole(currentUser, "ROLE_USER") && (
+                    <Nav.Link as={Link} to="/recommendationrequest">
+                      Recommendation Request
+                    </Nav.Link>
+                  )}
                   <Nav.Link as={Link} to="/articles">
                     Articles
                   </Nav.Link>

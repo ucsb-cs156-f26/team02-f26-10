@@ -34,6 +34,10 @@ import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
 import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
 import HelpRequestEditPage from "main/pages/HelpRequest/HelpRequestEditPage";
 
+import RecommendationRequestIndexPage from "main/pages/RecommendationRequest/RecommendationRequestIndexPage";
+import RecommendationRequestCreatePage from "main/pages/RecommendationRequest/RecommendationRequestCreatePage";
+import RecommendationRequestEditPage from "main/pages/RecommendationRequest/RecommendationRequestEditPage";
+
 import { hasRole, useCurrentUser } from "main/utils/useCurrentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -200,6 +204,27 @@ function App() {
             exact
             path="/helprequest/edit/:id"
             element={<HelpRequestEditPage />}
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_USER") && (
+        <Route
+          exact
+          path="/recommendationrequest"
+          element={<RecommendationRequestIndexPage />}
+        />
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            exact
+            path="/recommendationrequest/create"
+            element={<RecommendationRequestCreatePage />}
+          />
+          <Route
+            exact
+            path="/recommendationrequest/edit/:id"
+            element={<RecommendationRequestEditPage />}
           />
         </>
       )}
