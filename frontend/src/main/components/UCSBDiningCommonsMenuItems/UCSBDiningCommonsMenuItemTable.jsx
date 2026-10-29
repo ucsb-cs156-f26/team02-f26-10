@@ -5,19 +5,19 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/restaurantUtils";
+} from "main/utils/UCSBDiningCommonsMenuItemUtils";
 import { useNavigate } from "react-router";
 import { hasRole } from "main/utils/useCurrentUser";
 
-export default function RestaurantTable({
-  restaurants,
+export default function UCSBDiningCommonsMenuItemTable({
+  items,
   currentUser,
-  testIdPrefix = "RestaurantTable",
+  testIdPrefix = "UCSBDiningCommonsMenuItemTable",
 }) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/restaurants/edit/${cell.row.original.id}`);
+    navigate(`/ucsbdiningcommonsmenuitem/edit/${cell.row.original.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -25,7 +25,7 @@ export default function RestaurantTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/restaurants/all"],
+    ["/api/ucsbdiningcommonsmenuitems/all"],
   );
   // Stryker restore all
 
@@ -41,12 +41,16 @@ export default function RestaurantTable({
     },
 
     {
+      header: "Dining Commons Code",
+      accessorKey: "diningCommonsCode",
+    },
+    {
       header: "Name",
       accessorKey: "name",
     },
     {
-      header: "Description",
-      accessorKey: "description",
+      header: "Station",
+      accessorKey: "station",
     },
   ];
 
@@ -57,7 +61,5 @@ export default function RestaurantTable({
     );
   }
 
-  return (
-    <OurTable data={restaurants} columns={columns} testid={testIdPrefix} />
-  );
+  return <OurTable data={items} columns={columns} testid={testIdPrefix} />;
 }

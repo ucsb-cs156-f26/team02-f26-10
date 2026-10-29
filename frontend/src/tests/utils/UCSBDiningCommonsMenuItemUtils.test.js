@@ -1,7 +1,7 @@
 import {
   onDeleteSuccess,
   cellToAxiosParamsDelete,
-} from "main/utils/UCSBDateUtils";
+} from "main/utils/UCSBDiningCommonsMenuItemUtils";
 import mockConsole from "tests/testutils/mockConsole";
 
 const mockToast = vi.fn();
@@ -13,7 +13,7 @@ vi.mock("react-toastify", async (importOriginal) => {
   };
 });
 
-describe("UCSBDateUtils", () => {
+describe("UCSBDiningCommonsMenuItemUtils", () => {
   describe("onDeleteSuccess", () => {
     test("It puts the message on console.log and in a toast", () => {
       // arrange
@@ -41,7 +41,7 @@ describe("UCSBDateUtils", () => {
 
       // assert
       expect(result).toEqual({
-        url: "/api/ucsbdates",
+        url: "/api/ucsbdiningcommonsmenuitems",
         method: "DELETE",
         params: { id: 17 },
       });
