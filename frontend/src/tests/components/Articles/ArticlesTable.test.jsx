@@ -1,6 +1,19 @@
-import { render, screen } from "@testing-library/react";
+import { render as testingLibraryRender, screen } from "@testing-library/react";
 import { articlesFixtures } from "fixtures/articlesFixtures";
 import ArticlesTable from "main/components/Articles/ArticlesTable";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MemoryRouter } from "react-router";
+import { currentUserFixtures } from "fixtures/currentUserFixtures";
+
+const render = (component) => {
+  const queryClient = new QueryClient();
+  return testingLibraryRender(
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter>{component}</MemoryRouter>
+    </QueryClientProvider>,
+  );
+};
 
 describe("ArticlesTable tests", () => {
   const expectedHeaders = [
@@ -51,10 +64,17 @@ describe("ArticlesTable tests", () => {
       <ArticlesTable
         articles={[articlesFixtures.oneArticle]}
         testIdPrefix="CustomArticlesTable"
+        currentUser={currentUserFixtures.adminUser}
       />,
     );
 
     expect(screen.getByTestId("CustomArticlesTable")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("CustomArticlesTable-cell-row-0-col-Edit-button"),
+    ).toHaveClass("btn-primary");
+    expect(
+      screen.getByTestId("CustomArticlesTable-cell-row-0-col-Delete-button"),
+    ).toHaveClass("btn-danger");
     expect(
       screen.getByTestId("CustomArticlesTable-cell-row-0-col-title"),
     ).toHaveTextContent(articlesFixtures.oneArticle.title);
