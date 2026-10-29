@@ -323,4 +323,37 @@ describe("AppNavbar tests", () => {
       visible ? "/helprequest" : null,
     );
   });
+  test.each([
+    ["regular user", currentUserFixtures.userOnly, true],
+    ["admin", currentUserFixtures.adminUser, true],
+    ["logged out", currentUserFixtures.notLoggedIn, false],
+    ["missing user", null, false],
+    [
+      "logged in without user role",
+      {
+        ...currentUserFixtures.userOnly,
+        root: { ...currentUserFixtures.userOnly.root, rolesList: [] },
+      },
+      false,
+    ],
+  ])(
+    "Recommendation Request navbar link for %s",
+    (_label, currentUser, visible) => {
+      render(
+        <MemoryRouter>
+          <AppNavbar
+            currentUser={currentUser}
+            currentUrl="http://localhost:8080"
+          />
+        </MemoryRouter>,
+      );
+      const link = screen.queryByRole("link", {
+        name: "Recommendation Request",
+        exact: true,
+      });
+      expect(link?.getAttribute("href") ?? null).toBe(
+        visible ? "/recommendationrequest" : null,
+      );
+    },
+  );
 });

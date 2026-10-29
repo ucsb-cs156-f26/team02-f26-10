@@ -1,0 +1,24 @@
+import RecommendationRequestForm from "main/components/RecommendationRequest/RecommendationRequestForm";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
+
+export default {
+  title: "components/RecommendationRequest/RecommendationRequestForm",
+  component: RecommendationRequestForm,
+};
+
+const Template = (args) => <RecommendationRequestForm {...args} />;
+
+const submitAction = (data) => {
+  console.log("Submit was clicked with data: ", data);
+  window.alert("Submit was clicked with data: " + JSON.stringify(data));
+};
+
+export const Create = Template.bind({});
+Create.args = { submitAction };
+
+export const Update = Template.bind({});
+Update.args = {
+  initialContents: recommendationRequestFixtures.oneRecommendationRequest,
+  buttonLabel: "Update",
+  submitAction,
+};
