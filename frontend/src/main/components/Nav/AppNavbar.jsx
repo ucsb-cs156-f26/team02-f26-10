@@ -19,7 +19,7 @@ export default function AppNavbar({
       )}
 
       <Navbar
-        expand="xl"
+        expand="xxl"
         variant="dark"
         bg="dark"
         sticky="top"
@@ -49,7 +49,7 @@ export default function AppNavbar({
             {/* be sure that each NavDropdown has a unique id and data-testid  */}
           </>
 
-          <Navbar.Collapse className="justify-content-between">
+          <Navbar.Collapse className="justify-content-between flex-wrap">
             <Nav className="mr-auto">
               {hasRole(currentUser, "ROLE_ADMIN") && (
                 <NavDropdown
@@ -76,6 +76,11 @@ export default function AppNavbar({
                   <Nav.Link as={Link} to="/ucsbdates">
                     UCSB Dates
                   </Nav.Link>
+                  {hasRole(currentUser, "ROLE_USER") && (
+                    <Nav.Link as={Link} to="/helprequest">
+                      HelpRequest
+                    </Nav.Link>
+                  )}
                   <Nav.Link as={Link} to="/articles">
                     Articles
                   </Nav.Link>

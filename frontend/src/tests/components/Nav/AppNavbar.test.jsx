@@ -293,4 +293,34 @@ describe("AppNavbar tests", () => {
       screen.queryByRole("link", { name: "UCSBOrganization" }),
     ).not.toBeInTheDocument();
   });
+  test.each([
+    ["regular user", currentUserFixtures.userOnly, true],
+    ["admin", currentUserFixtures.adminUser, true],
+    ["logged out", currentUserFixtures.notLoggedIn, false],
+    ["missing user", null, false],
+    [
+      "logged in without user role",
+      {
+        ...currentUserFixtures.userOnly,
+        root: { ...currentUserFixtures.userOnly.root, rolesList: [] },
+      },
+      false,
+    ],
+  ])("HelpRequest navbar link for %s", (_label, currentUser, visible) => {
+    render(
+      <MemoryRouter>
+        <AppNavbar
+          currentUser={currentUser}
+          currentUrl="http://localhost:8080"
+        />
+      </MemoryRouter>,
+    );
+    const link = screen.queryByRole("link", {
+      name: "HelpRequest",
+      exact: true,
+    });
+    expect(link?.getAttribute("href") ?? null).toBe(
+      visible ? "/helprequest" : null,
+    );
+  });
 });
