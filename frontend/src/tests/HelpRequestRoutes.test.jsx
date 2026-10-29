@@ -13,10 +13,20 @@ vi.mock("main/layouts/BasicLayout/BasicLayout", () => ({
   default: ({ children }) => <>{children}</>,
 }));
 
-vi.mock("main/utils/useBackend", async () => ({
-  ...(await vi.importActual("main/utils/useBackend")),
-  useBackend: () => ({ data: [] }),
-}));
+vi.mock("main/utils/useBackend", async () => {
+  const { helpRequestFixtures } = await import("fixtures/helpRequestFixtures");
+  return {
+    ...(await vi.importActual("main/utils/useBackend")),
+    useBackend: (_key, request) => ({
+      data: request.params?.id
+        ? {
+            ...helpRequestFixtures.oneHelpRequest,
+            id: Number(request.params.id),
+          }
+        : [],
+    }),
+  };
+});
 
 test.each([
   ["/helprequest", "Index", currentUserFixtures.userOnly],
@@ -40,7 +50,7 @@ test.each([
           ? "HelpRequests"
           : kind === "Create"
             ? "Create New HelpRequest"
-            : `${kind} page not yet implemented`,
+            : "Edit HelpRequest",
     }),
   ).toBeInTheDocument();
 });
