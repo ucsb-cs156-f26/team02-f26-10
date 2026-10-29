@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-10
 owner: ucsb-cs156-f26
 repo_name: team02-f26-10
-pull_requests: [{"author":{"id":"U_kgDOBl8nXg","is_bot":false,"login":"nzhang95120","name":"Nathan Zhang"},"headRefName":"nz-Articles-index-page","number":98,"title":"Finished Index page for Articles","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/98"},{"author":{"id":"U_kgDODg3QcQ","is_bot":false,"login":"cmendietaa","name":""},"headRefName":"cm-HelpRequest-create","number":87,"title":"Connect HelpRequest Create Page to backend API","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/87"}]
+pull_requests: [{"author":{"id":"U_kgDODg3QcQ","is_bot":false,"login":"cmendietaa","name":""},"headRefName":"cm-HelpRequest-create","number":87,"title":"Connect HelpRequest Create Page to backend API","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/87"}]
