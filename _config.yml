@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-10
 owner: ucsb-cs156-f26
 repo_name: team02-f26-10
-pull_requests: [{"author":{"id":"U_kgDOCt4tfw","is_bot":false,"login":"zhewenjin2","name":""},"headRefName":"zhewenjin2-jpa04-integration-resubmit","number":111,"title":"test: add MenuItemReview integration test (jpa04)","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/111"}]
+pull_requests: [{"author":{"id":"U_kgDOCt4tfw","is_bot":false,"login":"zhewenjin2","name":""},"headRefName":"zhewenjin2-jpa04-e2e-resubmit","number":112,"title":"test: add MenuItemReview end-to-end test (jpa04)","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/112"},{"author":{"id":"U_kgDOCt4tfw","is_bot":false,"login":"zhewenjin2","name":""},"headRefName":"zhewenjin2-jpa04-integration-resubmit","number":111,"title":"test: add MenuItemReview integration test (jpa04)","url":"https://github.com/ucsb-cs156-f26/team02-f26-10/pull/111"}]
