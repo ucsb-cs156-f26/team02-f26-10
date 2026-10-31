@@ -56,6 +56,10 @@ test("create mode shows labeled empty inputs, date pickers, and unchecked done",
     );
   expect(screen.getByLabelText("Explanation").tagName).toBe("TEXTAREA");
   expect(screen.getByLabelText("Done")).not.toBeChecked();
+  for (const field of [...Object.keys(labels), "done", "submit", "cancel"])
+    expect(
+      screen.getByTestId(`RecommendationRequestForm-${field}`),
+    ).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Create" })).toHaveAttribute(
     "type",
     "submit",
