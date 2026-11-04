@@ -84,7 +84,7 @@ function UCSBDiningCommonsMenuItemForm({
       </Form.Group>
 
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
-      {buttonLabel}
+        {buttonLabel}
       </Button>
       <Button
         variant="Secondary"
