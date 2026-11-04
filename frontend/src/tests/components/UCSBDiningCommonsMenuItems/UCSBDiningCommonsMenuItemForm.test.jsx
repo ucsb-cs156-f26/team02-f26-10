@@ -36,6 +36,12 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
       const header = screen.getByText(headerText);
       expect(header).toBeInTheDocument();
     });
+
+    expect(
+      screen.getByTestId(`${testId}-diningCommonsCode`),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-name`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-station`)).toBeInTheDocument();
   });
 
   test("renders correctly when passing in initialContents", async () => {
@@ -86,7 +92,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
-    const submitButton = screen.getByText(/Create/);
+    const submitButton = screen.getByTestId(`${testId}-submit`);
     fireEvent.click(submitButton);
 
     await screen.findByText(/Dining Commons Code is required/);
